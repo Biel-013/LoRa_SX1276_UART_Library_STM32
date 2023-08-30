@@ -226,716 +226,689 @@ typedef struct {
 	LoRa_Value LoRa_SNR;
 } LoRa_RxStrengthTestTypeDef;
 
-/*---------------------------------------------------------------*/
+/*---- IDENTIDICADOR DO DISPOSITIVO FINAL --------------------------------------------------------------*/
 
 /**
- * @brief
- * @param
- * @param
- * @param
- * @retval
+ * @brief Identificador de dispositivo final no espaço de endereço IEEE EUI64
+ * @param _Operacao: Modo de operação do comando
+ * @param _Identifier: Identificador de dispositivo final
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_EndDeviceIdentifier (LoRa_OperationTypeDef _Operacao, LoRa_Id *_Identifier);
 
-/*---------------------------------------------------------------*/
+/*---- ID DE APLICATIVO GLOBAL -----------------------------------------------------------*/
 
 /**
- * @brief
- * @param
- * @param
- * @param
- * @retval
+ * @brief ID de aplicativo global no espaço de endereço IEEE EUI64
+ * @param _Operacao: Modo de operação do comando
+ * @param _Identifier: ID de aplicativo global
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_Id *_Identifier);
 
-/*---------------------------------------------------------------*/
+/*---- CHAVE DO DISPOSITIVO FINAL -----------------------------------------------------------*/
 
 /**
- * @brief
- * @param
- * @param
- * @param
- * @retval
+ * @brief Chave de raiz AES-128 específica para o dispositivo final
+ * @param _Operacao: Modo de operação do comando
+ * @param _Keyword: Chave do dispositivo final
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_ApplicationKey (LoRa_OperationTypeDef _Operacao, LoRa_KeyTypeDef *_Keyword);
 
-/*---------------------------------------------------------------*/
+/*---- STATUS DA REDE PÚBLICA -----------------------------------------------------------*/
 
 /**
- * @brief
- * @param
- * @param
- * @param
- * @retval
+ * @brief Status do modo de rede pública
+ * @param _Operacao: Modo de operação do comando
+ * @param _Status: Status da rede pública
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_PublicNetworkModeStatus (LoRa_OperationTypeDef _Operacao, LoRa_PublicNetworkTypeDef *_Status);
 
-/*---------------------------------------------------------------*/
+/*---- CONFIGURAÇÃO DO MODO DE INGRESSO NA REDE -----------------------------------------------------------*/
 
 /**
- * @brief
- * @param
- * @param
- * @param
- * @retval
+ * @brief Comando para configuração do modo de ingresso na rede, reinicie após a configuração ser atualizada e armazenada.
+ * @param _Operacao: Modo de operação do comando
+ * @param _Mode: Modo de ingresso na rede
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_NetworkJoinMode (LoRa_OperationTypeDef _Operacao, LoRa_NetworkJoinTypeDef *_Mode);
 
-/*---------------------------------------------------------------*/
+/*---- DEFINIÇÃO DE LORA MAC -----------------------------------------------------------*/
 
 /**
- * @brief
- * @param
- * @param
- * @param
- * @retval
+ * @brief Comando para definir a classe LoRa MAC
+ * @param _Operacao: Modo de operação do comando
+ * @param _Class: Classe de MAC
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_LoRaMacClass (LoRa_OperationTypeDef _Operacao, LoRa_MacClassTypeDef *_Class);
 
-/*---------------------------------------------------------------*/
+/*---- INGRESSO NA REDE LORA -----------------------------------------------------------*/
 
 /**
- * @brief
- * @param
- * @param
- * @param
- * @retval
+ * @brief Comando para ingressar no servidor de rede LoRa
+ * @param ***NONE***
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_JoinRequestNetworkServer (void);
 
-/*---------------------------------------------------------------*/
+/*---- STATUS DE INGRESSO NA REDE LORA -----------------------------------------------------------*/
 
 /**
- * @brief
- * @param
- * @param
- * @param
- * @retval
+ * @brief Comando para verificar o status de ingresso na rede LoRa
+ * @param _Status: Status de ingresso
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_JoinNetworkServerStatus (LoRa_NetworkJoinTypeDef *_Status);
 
-/*---------------------------------------------------------------*/
+/*---- SOLICITAÇÃO DE INGRESSO NA REDE AUTOMÁTICO -----------------------------------------------------------*/
 
 /**
- * @brief
- * @param
- * @param
- * @param
- * @retval
+ * @brief Comando para definir a solicitação de ingresso na rede automática quando o dispositivo é inicializado.
+ * @param _Operacao: Modo de operação do comando
+ * @param _Status: Status de solicitação de ingresso automático
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_AutoJoinNetworkServer (LoRa_OperationTypeDef _Operacao, LoRa_AutoNetworkJoinTypeDef *_Status);
 
-/*---------------------------------------------------------------*/
+/*---- CHAVE DA SESSÃO DE REDE -----------------------------------------------------------*/
 
 /**
- * @brief
- * @param
- * @param
- * @param
- * @retval
+ * @brief Chave da sessão de rede
+ * @param _Operacao: Modo de operação do comando
+ * @param _Keyword: Chave da sessão
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_NetworkSessionKey (LoRa_OperationTypeDef _Operacao, LoRa_KeyTypeDef *_Keyword);
 
-/*---------------------------------------------------------------*/
+/*---- CHAVE DA SESSÃO DO APLICATIVO -----------------------------------------------------------*/
 
 /**
- * @brief
- * @param
- * @param
- * @param
- * @retval
+ * @brief Chave de sessão do aplicativo
+ * @param _Operacao: Modo de operação do comando
+ * @param _Keyword: Chave da sessão
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_ApplicationSessionKey (LoRa_OperationTypeDef _Operacao, LoRa_KeyTypeDef *_Keyword);
 
-/*---------------------------------------------------------------*/
+/*---- ENDEREÇO DO DISPOSITIVO -----------------------------------------------------------*/
 
 /**
- * @brief
- * @param
- * @param
- * @param
- * @retval
+ * @brief Endereço do dispositivo
+ * @param _Operacao: Modo de operação do comando
+ * @param  _Adress: Endereço
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_DeviceAddress (LoRa_OperationTypeDef _Operacao, LoRa_Adress *_Adress);
 
-/*---------------------------------------------------------------*/
+/*---- IDENTIFICADOR DA REDE -----------------------------------------------------------*/
 
 /**
- * @brief
- * @param
- * @param
- * @param
- * @retval
+ * @brief Valor de exibição do identificador da rede
+ * @param _Operacao: Modo de operação do comando
+ * @param _Identifier: Identificador da rede
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_NetworkIdentifier (LoRa_OperationTypeDef _Operacao, LoRa_Id *_Identifier);
 
-/*---------------------------------------------------------------*/
+/*---- CONFIGURAÇOES ATIVAS -----------------------------------------------------------*/
 
 /**
- * @brief
- * @param
- * @param
- * @param
- * @retval
+ * @brief Retorna as configurações ativas
+ * @param _hSettings: Configurações ativas
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_ActivationSettingValue (LoRa_ActivationSettingTypeDef _hSettings);
 
-/*---------------------------------------------------------------*/
+/*---- ENVIO DE DADOS (STRING) -----------------------------------------------------------*/
 
 /**
- * @brief
- * @param
- * @param
- * @param
- * @retval
+ * @brief Comando LoRa para envio de dados do tipo string
+ * @param _Data: Dados para envio
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_DataUplinkText (LoRa_Data _Data[5]);
 
-/*---------------------------------------------------------------*/
+/*---- ENVIO DE DADOS (HEXADECIMAL) -----------------------------------------------------------*/
 
 /**
- * @brief
- * @param
- * @param
- * @param
- * @retval
+ * @brief Comando LoRa para envio de dados do tipo hexacimal
+ * @param _Data: Dados para envio
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_DataUplinkHexadecimal (LoRa_Data _Data[5]);
 
-/*---------------------------------------------------------------*/
+/*---- RECEBIMENTO DE DADOS (STRING) -----------------------------------------------------------*/
 
 /**
- * @brief
- * @param
- * @param
- * @param
- * @retval
+ * @brief Comando para leitura de dados de recebidos
+ * @param _Data: Dados recebidos
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_ConfirmDownlinkDataText (LoRa_Data _Data[5]);
 
-/*---------------------------------------------------------------*/
+/*---- RECEBIMENTO DE DADOS (HEXADECIMAL) -----------------------------------------------------------*/
 
 /**
- * @brief
- * @param
- * @param
- * @param
- * @retval
+ * @brief Comando para leitura de dados de recebidos
+ * @param _Data: Dados recebidos
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_ConfirmDownlinkDataHexadecimal(LoRa_Data _Data[5]);
 
-/*---------------------------------------------------------------*/
+/*---- VALOR DO RSSI DE LEITURA -----------------------------------------------------------*/
 
 /**
- * @brief
- * @param
- * @param
- * @param
- * @retval
+ * @brief Valor RSSI de leitura dos últimos dados recebidos
+ * @param  _Value: Valor do RSSI
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_ReturnRSSI(LoRa_RSSI *_Value);
 
-/*---------------------------------------------------------------*/
+/*---- VALOR DO SNR DE LEITURA -----------------------------------------------------------*/
 
 /**
- * @brief
+ * @brief Leitura do valor SNR (relação sinal-ruído) dos últimos dados recebidos
+ * @param _Value: Valor do SNR
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_ReturnsSNR(LoRa_Value *_Value);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
+ * @param _Operacao: Modo de operação do comando
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_LoRaMacRegion (LoRa_OperationTypeDef _Operacao, LoRa_LoraMacRegionTypeDef *_Region);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
+ * @param _Operacao: Modo de operação do comando
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_AutoDateRate (LoRa_OperationTypeDef _Operacao, LoRa_AutoDataRateTypeDef *_Status);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
+ * @param _Operacao: Modo de operação do comando
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_DataRateCommand (LoRa_OperationTypeDef _Operacao, LoRa_DataRateTypeDef *_DateRate);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
+ * @param _Operacao: Modo de operação do comando
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_RxWindow2Frequency  (LoRa_OperationTypeDef _Operacao, LoRa_Rate *_Rate);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
+ * @param _Operacao: Modo de operação do comando
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_RxWindow2DataRate (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Value);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
+ * @param _Operacao: Modo de operação do comando
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_TxRxWindow1Delay (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Value);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
+ * @param _Operacao: Modo de operação do comando
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_TxRxWindow2Delay (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Value);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
+ * @param _Operacao: Modo de operação do comando
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_TxRxWindow1JoinDelay (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Value);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
+ * @param _Operacao: Modo de operação do comando
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_TxRxWindow2JoinDelay (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Value);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
+ * @param _Operacao: Modo de operação do comando
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_RepeatUnconfirmedUplink (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Value);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
+ * @param _Operacao: Modo de operação do comando
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_ResendConfirmedUplink (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Value);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
+ * @param _Operacao: Modo de operação do comando
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_TxPowerIndex (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Value);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
+ * @param _Operacao: Modo de operação do comando
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_UplinkCounter (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Value);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
+ * @param _Operacao: Modo de operação do comando
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_DownlinkCounter (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Value);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
+ * @param _Operacao: Modo de operação do comando
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_BatteryLevel (LoRa_OperationTypeDef _Operacao, LoRa_BateryLevelTypeDef *_Identifier);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
  * @param
  * @param
  * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_MacLineCheckRequest  (void);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
+ * @param _Operacao: Modo de operação do comando
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_EncryptionConfiguration (LoRa_OperationTypeDef _Operacao, LoRa_ReadoutEncryptionTypeDef *_Encryption);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
+ * @param _Operacao: Modo de operação do comando
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_ChannelConfiguration  (LoRa_OperationTypeDef _Operacao,
 		LoRa_ChannelOperationTypeDef *_ChOperation, LoRa_ChannelConfigurationTypeDef *_hConfiguration);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
  * @param
  * @param
  * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_SystemReboot  (LoRa_SystemRebootModeTypeDef _Mode, LoRa_Value *_Channel);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
  * @param
  * @param
  * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_SystemInformation (LoRa_SystemInfoTypeDef *_hInfo);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
  * @param
  * @param
  * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_FirmwareVersion (LoRa_Float *_Version);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
  * @param
  * @param
  * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_AntennaGain (LoRa_Float *_Gain);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
+ * @param _Operacao: Modo de operação do comando
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_UplinkPacketType (LoRa_OperationTypeDef _Operacao, LoRa_UplinkTypePacketTypeDef *_Type);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
  * @param
  * @param
  * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_EntersLowPowerMode  (void);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
+ * @param _Operacao: Modo de operação do comando
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_RTCWakeupTime (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Time);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
+ * @param _Operacao: Modo de operação do comando
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_RTCTime (LoRa_OperationTypeDef _Operacao, LoRa_TimeTypeDef *_Time);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
+ * @param _Operacao: Modo de operação do comando
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_RTCDate (LoRa_OperationTypeDef _Operacao, LoRa_DateTypeDef *_Date);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
+ * @param _Operacao: Modo de operação do comando
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_ECHO (LoRa_OperationTypeDef _Operacao, LoRa_LoraEchoTypeDef *_Echo);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
  * @param
  * @param
  * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_ResetConfiguration (void);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
+ * @param _Operacao: Modo de operação do comando
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_DebugMessageStatus (LoRa_OperationTypeDef _Operacao, LoRa_DebugMessageTypeDef *_Status);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
+ * @param _Operacao: Modo de operação do comando
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_FSKTxContinuousWaveMode (LoRa_OperationTypeDef _Operacao, LoRa_Rate _Frequency,
 		LoRa_Value _Power, LoRa_Value *_Timeout);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
+ * @param _Operacao: Modo de operação do comando
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_LoRaRxSignalStrengthTest (LoRa_OperationTypeDef _Operacao, LoRa_Rate _Frequency,
 		LoRa_Value _DataRate, LoRa_StrenghtTestBaundTypeDef _TBaund, LoRa_RxStrengthTestTypeDef *_hInfo);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
+ * @param _Operacao: Modo de operação do comando
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_LoRaTxSignalStrengthTest (LoRa_OperationTypeDef _Operacao, LoRa_Rate _Frequency,
 		LoRa_Value _Power, LoRa_Value _DataRate, LoRa_StrenghtTestBaundTypeDef _TBaund,
 			LoRa_Value _NumberBytes, LoRa_Value _Period, LoRa_StrenghtTestStatusTypeDef *_Status);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
  * @param
  * @param
  * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_StopRFTest  (void);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
+ * @param _Operacao: Modo de operação do comando
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_GPIOPinInformation (LoRa_OperationTypeDef _Operacao, LoRa_PinTypeDef _GPIO,
 		LoRa_PinConfigurationTypeDef *_Config);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
+ * @param _Operacao: Modo de operação do comando
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_RegionalChannelListP2P (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Channel);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
+ * @param _Operacao: Modo de operação do comando
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_DeviceAdressP2P (LoRa_OperationTypeDef _Operacao, LoRa_Adress *_Adress);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
+ * @param _Operacao: Modo de operação do comando
  * @param
  * @param
- * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 LoRa_StatusTypeDef AT_SyncWordP2P (LoRa_OperationTypeDef _Operacao, LoRa_Value *_W);
 
-/*---------------------------------------------------------------*/
+/*----  -----------------------------------------------------------*/
 
 /**
  * @brief
  * @param
  * @param
  * @param
- * @retval
+ * @retval Status de execução do comando
  */
 
 

@@ -21,6 +21,8 @@ typedef uint64_t LoRa_Id;
 
 typedef uint8_t LoRa_Data;
 
+typedef int8_t LoRa_RSSI;
+
 typedef uint16_t LoRa_Value;
 
 typedef float LoRa_Float;
@@ -100,6 +102,11 @@ typedef enum {
 	LORA_DEBUG_MESSAG_OFF   = 0x00U,
 	LORA_DEBUG_MESSAG_ON    = 0x01U
 } LoRa_DebugMessageTypeDef;
+
+typedef enum {
+	LORA_RF_STRENGHT_TEST_ERROR    = 0x00U,
+	LORA_RF_STRENGHT_TEST_DONE     = 0x01U
+} LoRa_StrenghtTestStatusTypeDef;
 
 typedef enum {
 	LORA_RF_STRENGHT_TEST_BAUND_125KHZ    = 0x00U,
@@ -198,6 +205,13 @@ typedef struct {
 	LoRa_Value LoRa_Alarm;
 } LoRa_SystemInfoTypeDef;
 
+typedef struct {
+	LoRa_StrenghtTestStatusTypeDef LoRa_Status;
+	LoRa_Value LoRa_DataSize;
+	LoRa_RSSI LoRa_RSSI;
+	LoRa_Value LoRa_SNR;
+} LoRa_RxStrengthTestTypeDef;
+
 /*---------------------------------------------------------------*/
 
 /**
@@ -227,7 +241,7 @@ LoRa_StatusTypeDef AT_DataUplinkText (LoRa_Data _Data[5]);
 LoRa_StatusTypeDef AT_DataUplinkHexadecimal (LoRa_Data _Data[5]);
 LoRa_StatusTypeDef AT_ConfirmDownlinkDataText (LoRa_Data _Data[5]);
 LoRa_StatusTypeDef AT_ConfirmDownlinkDataHexadecimal(LoRa_Data _Data[5]);
-LoRa_StatusTypeDef AT_ReturnRSSI(LoRa_Value *_Value);
+LoRa_StatusTypeDef AT_ReturnRSSI(LoRa_RSSI *_Value);
 LoRa_StatusTypeDef AT_ReturnsSNR(LoRa_Value *_Value);
 
 LoRa_StatusTypeDef AT_LoRaMacRegion (LoRa_OperationTypeDef _Operacao, LoRa_LoraMacRegionTypeDef *_Region);
@@ -262,6 +276,21 @@ LoRa_StatusTypeDef AT_RTCDate (LoRa_OperationTypeDef _Operacao, LoRa_DateTypeDef
 LoRa_StatusTypeDef AT_ECHO (LoRa_OperationTypeDef _Operacao, LoRa_LoraEchoTypeDef *_Echo);
 LoRa_StatusTypeDef AT_ResetConfiguration (void);
 
+LoRa_StatusTypeDef AT_DebugMessageStatus (LoRa_OperationTypeDef _Operacao, LoRa_DebugMessageTypeDef *_Status);
+LoRa_StatusTypeDef AT_FSKTxContinuousWaveMode (LoRa_OperationTypeDef _Operacao, LoRa_Rate _Frequency,
+		LoRa_Value _Power, LoRa_Value *_Timeout);
+LoRa_StatusTypeDef AT_LoRaRxSignalStrengthTest (LoRa_OperationTypeDef _Operacao, LoRa_Rate _Frequency,
+		LoRa_Value _DataRate, LoRa_StrenghtTestBaundTypeDef _TBaund, LoRa_RxStrengthTestTypeDef *_hInfo);
+LoRa_StatusTypeDef AT_LoRaTxSignalStrengthTest (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
+LoRa_StatusTypeDef AT_StopRFTest  (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
+LoRa_StatusTypeDef AT_GPIOPinInformation (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
+
+LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
+LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
+LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
+LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
+LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
+LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
 LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
 
 #endif /* INC_LORA_SX1276_H_ */

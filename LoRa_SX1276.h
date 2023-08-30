@@ -17,12 +17,13 @@
 
 #define AT_ENDTERM "\r\n"
 
-
 typedef uint64_t LoRa_Id;
 
 typedef uint8_t LoRa_Data;
 
 typedef uint16_t LoRa_Value;
+
+typedef float LoRa_Float;
 
 typedef uint32_t LoRa_Rate;
 
@@ -142,6 +143,11 @@ typedef enum {
 	AT_CHANNEL_OPERATION_STATUS      = 0x03U
 } LoRa_ChannelOperationTypeDef;
 
+typedef enum {
+	AT_REBOOT_SYSTEM      = 0x00U,
+	AT_REBOOOT_CHANNEL      = 0x01U
+} LoRa_SystemRebootModeTypeDef;
+
 typedef struct {
 	LoRa_Id LoRa_EndDeviceIdentifier;
 	LoRa_Id LoRa_AppEUIAdress;
@@ -158,12 +164,39 @@ typedef struct {
 } LoRa_ActivationSettingTypeDef;
 
 typedef struct {
-	LoRa_Value LoRa_EndDeviceIdentifier;
-	LoRa_Rate LoRa_AppEUIAdress;
-	LoRa_Value LoRa_ApplicationKey;
-	LoRa_Value LoRa_PublicNetwork;
-	LoRa_Value LoRa_NetworkJoinMode;
-} LoRa_ActivationSettingTypeDef;
+	LoRa_Value LoRa_Channel;
+	LoRa_Rate LoRa_Frequency;
+	LoRa_Value LoRa_MinDrRange;
+	LoRa_Value LoRa_MaxDrRange;
+	LoRa_Value LoRa_StatusChannel;
+} LoRa_ChannelConfigurationTypeDef;
+
+typedef struct {
+	LoRa_Value LoRa_Dia;
+	LoRa_Value LoRa_Mes;
+	LoRa_Value LoRa_Ano;
+} LoRa_DateTypeDef;
+
+typedef struct {
+	LoRa_Value LoRa_Horas;
+	LoRa_Value LoRa_Minutos;
+	LoRa_Float LoRa_Segundos;
+} LoRa_TimeTypeDef;
+
+typedef struct {
+	LoRa_Float LoRa_FirmVersion;
+	LoRa_LoraMacRegionTypeDef LoRa_Region;
+	LoRa_DateTypeDef LoRa_Date;
+	LoRa_TimeTypeDef LoRa_Time;
+	LoRa_LoraEchoTypeDef LoRa_Echo;
+	LoRa_Float LoRa_AntennaGain;
+	LoRa_Value LoRa_AutoDataRate;
+	LoRa_AutoDataRateTypeDef LoRa_DataRate;
+	LoRa_Value LoRa_ConfirmedUplinkCount;
+	LoRa_Value LoRa_UnConfirmedUplinkCount;
+	LoRa_UplinkTypePacketTypeDef LoRa_UplinkMessageType;
+	LoRa_Value LoRa_Alarm;
+} LoRa_SystemInfoTypeDef;
 
 /*---------------------------------------------------------------*/
 
@@ -214,19 +247,21 @@ LoRa_StatusTypeDef AT_DownlinkCounter (LoRa_OperationTypeDef _Operacao, LoRa_Val
 LoRa_StatusTypeDef AT_BatteryLevel (LoRa_OperationTypeDef _Operacao, LoRa_BateryLevelTypeDef *_Identifier);
 LoRa_StatusTypeDef AT_MacLineCheckRequest  (void);
 LoRa_StatusTypeDef AT_EncryptionConfiguration (LoRa_OperationTypeDef _Operacao, LoRa_ReadoutEncryptionTypeDef *_Encryption);
-LoRa_StatusTypeDef AT_ChannelConfiguration  (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
+LoRa_StatusTypeDef AT_ChannelConfiguration  (LoRa_OperationTypeDef _Operacao,
+		LoRa_ChannelOperationTypeDef *_ChOperation, LoRa_ChannelConfigurationTypeDef *_hConfiguration);
 
-LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
-LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
-LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
-LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
-LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
-LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
-LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
-LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
-LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
-LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
-LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
+LoRa_StatusTypeDef AT_SystemReboot  (LoRa_SystemRebootModeTypeDef _Mode, LoRa_Value *_Channel);
+LoRa_StatusTypeDef AT_SystemInformation (LoRa_SystemInfoTypeDef *_hInfo);
+LoRa_StatusTypeDef AT_FirmwareVersion (LoRa_Float *_Version);
+LoRa_StatusTypeDef AT_AntennaGain (LoRa_Float *_Gain);
+LoRa_StatusTypeDef AT_UplinkPacketType (LoRa_OperationTypeDef _Operacao, LoRa_UplinkTypePacketTypeDef *_Type);
+LoRa_StatusTypeDef AT_EntersLowPowerMode  (void);
+LoRa_StatusTypeDef AT_RTCWakeupTime (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Time);
+LoRa_StatusTypeDef AT_RTCTime (LoRa_OperationTypeDef _Operacao, LoRa_TimeTypeDef *_Time);
+LoRa_StatusTypeDef AT_RTCDate (LoRa_OperationTypeDef _Operacao, LoRa_DateTypeDef *_Date);
+LoRa_StatusTypeDef AT_ECHO (LoRa_OperationTypeDef _Operacao, LoRa_LoraEchoTypeDef *_Echo);
+LoRa_StatusTypeDef AT_ResetConfiguration (void);
+
 LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
 
 #endif /* INC_LORA_SX1276_H_ */

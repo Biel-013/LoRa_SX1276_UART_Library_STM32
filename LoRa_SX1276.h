@@ -25,6 +25,8 @@ typedef int8_t LoRa_RSSI;
 
 typedef uint16_t LoRa_Value;
 
+typedef unsigned char LoRa_Char;
+
 typedef float LoRa_Float;
 
 typedef uint32_t LoRa_Rate;
@@ -145,15 +147,22 @@ typedef enum {
 
 typedef enum {
 	AT_CHANNEL_OPERATION_CHANNEL      = 0x00U,
-	AT_CHANNEL_OPERATION_FREQ      = 0x01U,
+	AT_CHANNEL_OPERATION_FREQ         = 0x01U,
 	AT_CHANNEL_OPERATION_DRRANGE      = 0x02U,
-	AT_CHANNEL_OPERATION_STATUS      = 0x03U
+	AT_CHANNEL_OPERATION_STATUS       = 0x03U
 } LoRa_ChannelOperationTypeDef;
 
 typedef enum {
 	AT_REBOOT_SYSTEM      = 0x00U,
 	AT_REBOOOT_CHANNEL      = 0x01U
 } LoRa_SystemRebootModeTypeDef;
+
+typedef enum {
+	AT_GPIO_MODE_INPUT      = 0x00U,
+	AT_GPIO_MODE_OUTPUT      = 0x01U,
+	AT_GPIO_SET_HIGH      = 0x02U,
+	AT_GPIO_SET_LOW      = 0x03U
+} LoRa_PinConfigurationTypeDef;
 
 typedef struct {
 	LoRa_Id LoRa_EndDeviceIdentifier;
@@ -191,6 +200,11 @@ typedef struct {
 } LoRa_TimeTypeDef;
 
 typedef struct {
+	LoRa_Char LoRa_PinChar;
+	LoRa_Value LoRa_PinNumber;
+} LoRa_PinTypeDef;
+
+typedef struct {
 	LoRa_Float LoRa_FirmVersion;
 	LoRa_LoraMacRegionTypeDef LoRa_Region;
 	LoRa_DateTypeDef LoRa_Date;
@@ -223,74 +237,706 @@ typedef struct {
  */
 
 LoRa_StatusTypeDef AT_EndDeviceIdentifier (LoRa_OperationTypeDef _Operacao, LoRa_Id *_Identifier);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_Id *_Identifier);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_ApplicationKey (LoRa_OperationTypeDef _Operacao, LoRa_KeyTypeDef *_Keyword);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_PublicNetworkModeStatus (LoRa_OperationTypeDef _Operacao, LoRa_PublicNetworkTypeDef *_Status);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_NetworkJoinMode (LoRa_OperationTypeDef _Operacao, LoRa_NetworkJoinTypeDef *_Mode);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_LoRaMacClass (LoRa_OperationTypeDef _Operacao, LoRa_MacClassTypeDef *_Class);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_JoinRequestNetworkServer (void);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_JoinNetworkServerStatus (LoRa_NetworkJoinTypeDef *_Status);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_AutoJoinNetworkServer (LoRa_OperationTypeDef _Operacao, LoRa_AutoNetworkJoinTypeDef *_Status);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_NetworkSessionKey (LoRa_OperationTypeDef _Operacao, LoRa_KeyTypeDef *_Keyword);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_ApplicationSessionKey (LoRa_OperationTypeDef _Operacao, LoRa_KeyTypeDef *_Keyword);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_DeviceAddress (LoRa_OperationTypeDef _Operacao, LoRa_Adress *_Adress);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_NetworkIdentifier (LoRa_OperationTypeDef _Operacao, LoRa_Id *_Identifier);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_ActivationSettingValue (LoRa_ActivationSettingTypeDef _hSettings);
 
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_DataUplinkText (LoRa_Data _Data[5]);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_DataUplinkHexadecimal (LoRa_Data _Data[5]);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_ConfirmDownlinkDataText (LoRa_Data _Data[5]);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_ConfirmDownlinkDataHexadecimal(LoRa_Data _Data[5]);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_ReturnRSSI(LoRa_RSSI *_Value);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_ReturnsSNR(LoRa_Value *_Value);
 
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_LoRaMacRegion (LoRa_OperationTypeDef _Operacao, LoRa_LoraMacRegionTypeDef *_Region);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_AutoDateRate (LoRa_OperationTypeDef _Operacao, LoRa_AutoDataRateTypeDef *_Status);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_DataRateCommand (LoRa_OperationTypeDef _Operacao, LoRa_DataRateTypeDef *_DateRate);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_RxWindow2Frequency  (LoRa_OperationTypeDef _Operacao, LoRa_Rate *_Rate);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_RxWindow2DataRate (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Value);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_TxRxWindow1Delay (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Value);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_TxRxWindow2Delay (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Value);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_TxRxWindow1JoinDelay (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Value);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_TxRxWindow2JoinDelay (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Value);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_RepeatUnconfirmedUplink (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Value);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_ResendConfirmedUplink (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Value);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_TxPowerIndex (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Value);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_UplinkCounter (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Value);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_DownlinkCounter (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Value);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_BatteryLevel (LoRa_OperationTypeDef _Operacao, LoRa_BateryLevelTypeDef *_Identifier);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_MacLineCheckRequest  (void);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_EncryptionConfiguration (LoRa_OperationTypeDef _Operacao, LoRa_ReadoutEncryptionTypeDef *_Encryption);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_ChannelConfiguration  (LoRa_OperationTypeDef _Operacao,
 		LoRa_ChannelOperationTypeDef *_ChOperation, LoRa_ChannelConfigurationTypeDef *_hConfiguration);
 
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_SystemReboot  (LoRa_SystemRebootModeTypeDef _Mode, LoRa_Value *_Channel);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_SystemInformation (LoRa_SystemInfoTypeDef *_hInfo);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_FirmwareVersion (LoRa_Float *_Version);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_AntennaGain (LoRa_Float *_Gain);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_UplinkPacketType (LoRa_OperationTypeDef _Operacao, LoRa_UplinkTypePacketTypeDef *_Type);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_EntersLowPowerMode  (void);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_RTCWakeupTime (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Time);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_RTCTime (LoRa_OperationTypeDef _Operacao, LoRa_TimeTypeDef *_Time);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_RTCDate (LoRa_OperationTypeDef _Operacao, LoRa_DateTypeDef *_Date);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_ECHO (LoRa_OperationTypeDef _Operacao, LoRa_LoraEchoTypeDef *_Echo);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_ResetConfiguration (void);
 
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_DebugMessageStatus (LoRa_OperationTypeDef _Operacao, LoRa_DebugMessageTypeDef *_Status);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_FSKTxContinuousWaveMode (LoRa_OperationTypeDef _Operacao, LoRa_Rate _Frequency,
 		LoRa_Value _Power, LoRa_Value *_Timeout);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 LoRa_StatusTypeDef AT_LoRaRxSignalStrengthTest (LoRa_OperationTypeDef _Operacao, LoRa_Rate _Frequency,
 		LoRa_Value _DataRate, LoRa_StrenghtTestBaundTypeDef _TBaund, LoRa_RxStrengthTestTypeDef *_hInfo);
-LoRa_StatusTypeDef AT_LoRaTxSignalStrengthTest (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
-LoRa_StatusTypeDef AT_StopRFTest  (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
-LoRa_StatusTypeDef AT_GPIOPinInformation (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
 
-LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
-LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
-LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
-LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
-LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
-LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
-LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
+LoRa_StatusTypeDef AT_LoRaTxSignalStrengthTest (LoRa_OperationTypeDef _Operacao, LoRa_Rate _Frequency,
+		LoRa_Value _Power, LoRa_Value _DataRate, LoRa_StrenghtTestBaundTypeDef _TBaund,
+			LoRa_Value _NumberBytes, LoRa_Value _Period, LoRa_StrenghtTestStatusTypeDef *_Status);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
+LoRa_StatusTypeDef AT_StopRFTest  (void);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
+LoRa_StatusTypeDef AT_GPIOPinInformation (LoRa_OperationTypeDef _Operacao, LoRa_PinTypeDef _GPIO,
+		LoRa_PinConfigurationTypeDef *_Config);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
+LoRa_StatusTypeDef AT_RegionalChannelListP2P (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Channel);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
+LoRa_StatusTypeDef AT_DeviceAdressP2P (LoRa_OperationTypeDef _Operacao, LoRa_Adress *_Adress);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
+LoRa_StatusTypeDef AT_SyncWordP2P (LoRa_OperationTypeDef _Operacao, LoRa_Value *_W);
+
+/*---------------------------------------------------------------*/
+
+/**
+ * @brief
+ * @param
+ * @param
+ * @param
+ * @retval
+ */
+
 
 #endif /* INC_LORA_SX1276_H_ */

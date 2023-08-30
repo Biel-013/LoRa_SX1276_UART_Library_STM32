@@ -18,13 +18,15 @@
 #define AT_ENDTERM "\r\n"
 
 
-typedef uint64_t LoRa_IdTypeDef;
+typedef uint64_t LoRa_Id;
 
 typedef uint8_t LoRa_Data;
 
 typedef uint16_t LoRa_Value;
 
-typedef uint32_t LoRa_AdressTypeDef;
+typedef uint32_t LoRa_Rate;
+
+typedef uint32_t LoRa_Adress;
 
 typedef struct {
 	uint64_t *LoRa_HighKey;
@@ -130,22 +132,37 @@ typedef enum {
 	LORAMAC_REGION_EU868      = 0x05U,
 	LORAMAC_REGION_KR920      = 0x06U,
 	LORAMAC_REGION_IN865      = 0x07U,
-	LORAMAC_REGION_US915      = 0x07U
+	LORAMAC_REGION_US915      = 0x08U
 } LoRa_LoraMacRegionTypeDef;
 
+typedef enum {
+	AT_CHANNEL_OPERATION_CHANNEL      = 0x00U,
+	AT_CHANNEL_OPERATION_FREQ      = 0x01U,
+	AT_CHANNEL_OPERATION_DRRANGE      = 0x02U,
+	AT_CHANNEL_OPERATION_STATUS      = 0x03U
+} LoRa_ChannelOperationTypeDef;
+
 typedef struct {
-	LoRa_IdTypeDef LoRa_EndDeviceIdentifier;
-	LoRa_IdTypeDef LoRa_AppEUIAdress;
+	LoRa_Id LoRa_EndDeviceIdentifier;
+	LoRa_Id LoRa_AppEUIAdress;
 	LoRa_KeyTypeDef LoRa_ApplicationKey;
 	LoRa_PublicNetworkTypeDef LoRa_PublicNetwork;
 	LoRa_NetworkJoinModeTypeDef LoRa_NetworkJoinMode;
 	LoRa_MacClassTypeDef LoRa_MacClass;
 	LoRa_NetworkJoinTypeDef LoRa_NetworkJoin;
-	LoRa_IdTypeDef *LoRa_NetworkIdentifier;
-	LoRa_AdressTypeDef *LoRa_DeviceAddress;
+	LoRa_Id *LoRa_NetworkIdentifier;
+	LoRa_Adress *LoRa_DeviceAddress;
 	LoRa_KeyTypeDef LoRa_NetworkSessionKey;
 	LoRa_KeyTypeDef LoRa_ApplicationSessionKey;
 	LoRa_AutoNetworkJoinTypeDef LoRa_AutoNetworkJoin;
+} LoRa_ActivationSettingTypeDef;
+
+typedef struct {
+	LoRa_Value LoRa_EndDeviceIdentifier;
+	LoRa_Rate LoRa_AppEUIAdress;
+	LoRa_Value LoRa_ApplicationKey;
+	LoRa_Value LoRa_PublicNetwork;
+	LoRa_Value LoRa_NetworkJoinMode;
 } LoRa_ActivationSettingTypeDef;
 
 /*---------------------------------------------------------------*/
@@ -158,8 +175,8 @@ typedef struct {
  * @retval
  */
 
-LoRa_StatusTypeDef AT_EndDeviceIdentifier (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
-LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
+LoRa_StatusTypeDef AT_EndDeviceIdentifier (LoRa_OperationTypeDef _Operacao, LoRa_Id *_Identifier);
+LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_Id *_Identifier);
 LoRa_StatusTypeDef AT_ApplicationKey (LoRa_OperationTypeDef _Operacao, LoRa_KeyTypeDef *_Keyword);
 LoRa_StatusTypeDef AT_PublicNetworkModeStatus (LoRa_OperationTypeDef _Operacao, LoRa_PublicNetworkTypeDef *_Status);
 LoRa_StatusTypeDef AT_NetworkJoinMode (LoRa_OperationTypeDef _Operacao, LoRa_NetworkJoinTypeDef *_Mode);
@@ -169,8 +186,8 @@ LoRa_StatusTypeDef AT_JoinNetworkServerStatus (LoRa_NetworkJoinTypeDef *_Status)
 LoRa_StatusTypeDef AT_AutoJoinNetworkServer (LoRa_OperationTypeDef _Operacao, LoRa_AutoNetworkJoinTypeDef *_Status);
 LoRa_StatusTypeDef AT_NetworkSessionKey (LoRa_OperationTypeDef _Operacao, LoRa_KeyTypeDef *_Keyword);
 LoRa_StatusTypeDef AT_ApplicationSessionKey (LoRa_OperationTypeDef _Operacao, LoRa_KeyTypeDef *_Keyword);
-LoRa_StatusTypeDef AT_DeviceAddress (LoRa_OperationTypeDef _Operacao, LoRa_AdressTypeDef *_Adress);
-LoRa_StatusTypeDef AT_NetworkIdentifier (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
+LoRa_StatusTypeDef AT_DeviceAddress (LoRa_OperationTypeDef _Operacao, LoRa_Adress *_Adress);
+LoRa_StatusTypeDef AT_NetworkIdentifier (LoRa_OperationTypeDef _Operacao, LoRa_Id *_Identifier);
 LoRa_StatusTypeDef AT_ActivationSettingValue (LoRa_ActivationSettingTypeDef _hSettings);
 
 LoRa_StatusTypeDef AT_DataUplinkText (LoRa_Data _Data[5]);
@@ -179,5 +196,37 @@ LoRa_StatusTypeDef AT_ConfirmDownlinkDataText (LoRa_Data _Data[5]);
 LoRa_StatusTypeDef AT_ConfirmDownlinkDataHexadecimal(LoRa_Data _Data[5]);
 LoRa_StatusTypeDef AT_ReturnRSSI(LoRa_Value *_Value);
 LoRa_StatusTypeDef AT_ReturnsSNR(LoRa_Value *_Value);
+
+LoRa_StatusTypeDef AT_LoRaMacRegion (LoRa_OperationTypeDef _Operacao, LoRa_LoraMacRegionTypeDef *_Region);
+LoRa_StatusTypeDef AT_AutoDateRate (LoRa_OperationTypeDef _Operacao, LoRa_AutoDataRateTypeDef *_Status);
+LoRa_StatusTypeDef AT_DataRateCommand (LoRa_OperationTypeDef _Operacao, LoRa_DataRateTypeDef *_DateRate);
+LoRa_StatusTypeDef AT_RxWindow2Frequency  (LoRa_OperationTypeDef _Operacao, LoRa_Rate *_Rate);
+LoRa_StatusTypeDef AT_RxWindow2DataRate (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Value);
+LoRa_StatusTypeDef AT_TxRxWindow1Delay (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Value);
+LoRa_StatusTypeDef AT_TxRxWindow2Delay (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Value);
+LoRa_StatusTypeDef AT_TxRxWindow1JoinDelay (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Value);
+LoRa_StatusTypeDef AT_TxRxWindow2JoinDelay (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Value);
+LoRa_StatusTypeDef AT_RepeatUnconfirmedUplink (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Value);
+LoRa_StatusTypeDef AT_ResendConfirmedUplink (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Value);
+LoRa_StatusTypeDef AT_TxPowerIndex (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Value);
+LoRa_StatusTypeDef AT_UplinkCounter (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Value);
+LoRa_StatusTypeDef AT_DownlinkCounter (LoRa_OperationTypeDef _Operacao, LoRa_Value *_Value);
+LoRa_StatusTypeDef AT_BatteryLevel (LoRa_OperationTypeDef _Operacao, LoRa_BateryLevelTypeDef *_Identifier);
+LoRa_StatusTypeDef AT_MacLineCheckRequest  (void);
+LoRa_StatusTypeDef AT_EncryptionConfiguration (LoRa_OperationTypeDef _Operacao, LoRa_ReadoutEncryptionTypeDef *_Encryption);
+LoRa_StatusTypeDef AT_ChannelConfiguration  (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
+
+LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
+LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
+LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
+LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
+LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
+LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
+LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
+LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
+LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
+LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
+LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
+LoRa_StatusTypeDef AT_AppEUIAdress (LoRa_OperationTypeDef _Operacao, LoRa_IdTypeDef *_Identifier);
 
 #endif /* INC_LORA_SX1276_H_ */
